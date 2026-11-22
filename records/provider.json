@@ -1,0 +1,153 @@
+{
+  "stages": {
+    "week": [
+      {
+        "path": "/repairs/archive",
+        "body": {
+          "indexed": false,
+          "orders": []
+        },
+        "query": {
+          "market": "S",
+          "week": "2"
+        }
+      },
+      {
+        "path": "/stock/holds",
+        "body": null,
+        "method": "POST",
+        "payload": {
+          "warehouse": "W1",
+          "card": "J2",
+          "key": "h-J2"
+        },
+        "drop": true
+      },
+      {
+        "path": "/stock/bins",
+        "body": [
+          {
+            "warehouse": "W1",
+            "markets": [
+              "S",
+              "N"
+            ],
+            "part": "seal",
+            "available": 1
+          }
+        ]
+      }
+    ],
+    "late": [
+      {
+        "path": "/repairs/archive",
+        "body": {
+          "indexed": true,
+          "orders": [
+            {
+              "job": "J4",
+              "batch": "B2",
+              "part": "X",
+              "close": "F1"
+            }
+          ]
+        },
+        "query": {
+          "market": "S",
+          "week": "2"
+        }
+      },
+      {
+        "path": "/repairs/handover",
+        "body": [
+          {
+            "handover": "F2",
+            "before": [
+              "B1",
+              "X"
+            ],
+            "after": [
+              "B2",
+              "X"
+            ],
+            "retains": true
+          }
+        ]
+      },
+      {
+        "path": "/stock/receipts",
+        "body": {
+          "state": "held",
+          "receipt": "H1",
+          "warehouse": "W1",
+          "card": "J2",
+          "expires": 98
+        },
+        "query": {
+          "key": "h-J2"
+        }
+      },
+      {
+        "path": "/stock/release",
+        "body": {
+          "receipt": "H1",
+          "state": "received"
+        },
+        "method": "POST",
+        "payload": {
+          "receipt": "H1"
+        },
+        "status": 202
+      }
+    ],
+    "warehouse": [
+      {
+        "path": "/stock/receipts",
+        "body": {
+          "state": "released",
+          "receipt": "H1",
+          "warehouse": "W1",
+          "card": "J2"
+        },
+        "query": {
+          "key": "h-J2"
+        }
+      },
+      {
+        "path": "/stock/receipts",
+        "body": {
+          "state": "issued",
+          "receipt": "H2",
+          "warehouse": "W1",
+          "card": "J5"
+        },
+        "query": {
+          "key": "h-J5"
+        }
+      },
+      {
+        "path": "/stock/bins",
+        "body": [
+          {
+            "warehouse": "W1",
+            "markets": [
+              "S",
+              "N"
+            ],
+            "part": "seal",
+            "available": 1
+          },
+          {
+            "warehouse": "W2",
+            "markets": [
+              "N"
+            ],
+            "part": "seal",
+            "available": 3
+          }
+        ]
+      }
+    ]
+  },
+  "common": []
+}

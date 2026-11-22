@@ -17,7 +17,7 @@ function post(root, endpoint, value) {
 
 test('早期周档无法证明闭单不存在，仓库断线后仍可返回原预留', async t => {
   const root = await listen(t)
-  const oldWeek = async () => (await (await fetch(root + '/repairs/archive?market=S&week=2')).json())
+  const oldWeek = async () => (await (await fetch(root + '/repairs/archive?market=MY&week=2')).json())
   assert.equal((await oldWeek()).indexed, false)
   await assert.rejects(post(root, '/stock/holds', { warehouse: 'W1', card: 'J2', key: 'h-J2' }))
   await post(root, '/lab?stage=late')

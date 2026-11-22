@@ -8,7 +8,7 @@
           "orders": []
         },
         "query": {
-          "market": "S",
+          "market": "MY",
           "week": "2"
         }
       },
@@ -21,7 +21,8 @@
           "card": "J2",
           "key": "h-J2"
         },
-        "drop": true
+        "drop": true,
+        "next": "awaiting"
       },
       {
         "path": "/stock/bins",
@@ -29,10 +30,10 @@
           {
             "warehouse": "W1",
             "markets": [
-              "S",
-              "N"
+              "MY",
+              "SG"
             ],
-            "part": "seal",
+            "part": "MOT",
             "available": 1
           }
         ]
@@ -46,14 +47,14 @@
           "orders": [
             {
               "job": "J4",
-              "batch": "B2",
-              "part": "X",
-              "close": "F1"
+              "batch": "V",
+              "part": "02",
+              "close": "C7"
             }
           ]
         },
         "query": {
-          "market": "S",
+          "market": "MY",
           "week": "2"
         }
       },
@@ -63,12 +64,12 @@
           {
             "handover": "F2",
             "before": [
-              "B1",
-              "X"
+              "V",
+              "02"
             ],
             "after": [
-              "B2",
-              "X"
+              "L",
+              "02"
             ],
             "retains": true
           }
@@ -131,21 +132,61 @@
           {
             "warehouse": "W1",
             "markets": [
-              "S",
-              "N"
+              "MY",
+              "SG"
             ],
-            "part": "seal",
+            "part": "MOT",
             "available": 1
           },
           {
             "warehouse": "W2",
             "markets": [
-              "N"
+              "SG"
             ],
-            "part": "seal",
+            "part": "MOT",
             "available": 3
           }
         ]
+      }
+    ],
+    "awaiting": [
+      {
+        "path": "/repairs/archive",
+        "body": {
+          "indexed": false,
+          "orders": []
+        },
+        "query": {
+          "market": "MY",
+          "week": "2"
+        }
+      },
+      {
+        "path": "/stock/bins",
+        "body": [
+          {
+            "warehouse": "W1",
+            "markets": [
+              "MY",
+              "SG"
+            ],
+            "part": "MOT",
+            "available": 1
+          }
+        ]
+      },
+      {
+        "path": "/stock/receipts",
+        "body": {
+          "state": "held",
+          "receipt": "H1",
+          "warehouse": "W1",
+          "card": "J2",
+          "expires": 98
+        },
+        "query": {
+          "key": "h-J2"
+        }
       }
     ]
   },

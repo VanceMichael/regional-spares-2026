@@ -188,6 +188,200 @@
           "key": "h-J2"
         }
       }
+    ],
+    "shortage": [
+      {
+        "path": "/repairs/archive",
+        "body": {
+          "indexed": false,
+          "orders": []
+        },
+        "query": {
+          "market": "MY",
+          "week": "2"
+        }
+      },
+      {
+        "path": "/stock/receipts",
+        "body": {
+          "state": "expired",
+          "receipt": "H1",
+          "warehouse": "W1",
+          "card": "J2",
+          "expires": 5
+        },
+        "query": {
+          "key": "h-J2"
+        }
+      },
+      {
+        "path": "/stock/bins",
+        "body": [
+          {
+            "warehouse": "W1",
+            "markets": [
+              "MY",
+              "SG"
+            ],
+            "part": "MOT",
+            "available": 1
+          }
+        ]
+      },
+      {
+        "path": "/stock/holds",
+        "body": {
+          "receipt": "H9",
+          "state": "held"
+        },
+        "method": "POST",
+        "payload": {
+          "warehouse": "W1",
+          "card": "J2",
+          "key": "h-J2-2"
+        },
+        "next": "shortage-held"
+      }
+    ],
+    "shortage-held": [
+      {
+        "path": "/repairs/archive",
+        "body": {
+          "indexed": false,
+          "orders": []
+        },
+        "query": {
+          "market": "MY",
+          "week": "2"
+        }
+      },
+      {
+        "path": "/stock/receipts",
+        "body": {
+          "state": "expired",
+          "receipt": "H1",
+          "warehouse": "W1",
+          "card": "J2",
+          "expires": 5
+        },
+        "query": {
+          "key": "h-J2"
+        }
+      },
+      {
+        "path": "/stock/receipts",
+        "body": {
+          "state": "held",
+          "receipt": "H9",
+          "warehouse": "W1",
+          "card": "J2",
+          "expires": 120
+        },
+        "query": {
+          "key": "h-J2-2"
+        }
+      },
+      {
+        "path": "/stock/bins",
+        "body": [
+          {
+            "warehouse": "W1",
+            "markets": [
+              "MY",
+              "SG"
+            ],
+            "part": "MOT",
+            "available": 0
+          }
+        ]
+      }
+    ],
+    "sglate": [
+      {
+        "path": "/repairs/archive",
+        "body": {
+          "indexed": true,
+          "orders": [
+            {
+              "job": "J4",
+              "batch": "V",
+              "part": "02",
+              "close": "C7"
+            }
+          ]
+        },
+        "query": {
+          "market": "MY",
+          "week": "2"
+        }
+      },
+      {
+        "path": "/repairs/archive",
+        "body": {
+          "indexed": true,
+          "orders": [
+            {
+              "job": "J6",
+              "batch": "G",
+              "part": "03",
+              "close": "C8"
+            },
+            {
+              "job": "J7",
+              "batch": "G",
+              "part": "03",
+              "close": "C9"
+            }
+          ]
+        },
+        "query": {
+          "market": "SG",
+          "week": "2"
+        }
+      },
+      {
+        "path": "/repairs/handover",
+        "body": [
+          {
+            "handover": "F2",
+            "before": [
+              "V",
+              "02"
+            ],
+            "after": [
+              "L",
+              "02"
+            ],
+            "retains": true
+          }
+        ]
+      },
+      {
+        "path": "/stock/receipts",
+        "body": {
+          "state": "issued",
+          "receipt": "H2",
+          "warehouse": "W1",
+          "card": "J5"
+        },
+        "query": {
+          "key": "h-J5"
+        }
+      },
+      {
+        "path": "/stock/bins",
+        "body": [
+          {
+            "warehouse": "W1",
+            "markets": [
+              "MY",
+              "SG"
+            ],
+            "part": "MOT",
+            "available": 1
+          }
+        ]
+      }
     ]
   },
   "common": []
